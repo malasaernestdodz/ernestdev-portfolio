@@ -22,7 +22,7 @@ jobs:
 
   deploy:
     needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && secrets.FIREBASE_SERVICE_ACCOUNT != ''
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -32,7 +32,13 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Check Firebase credentials
+        id: creds
+        env:
+          SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: echo "present=$(test -n \"$SA\" && echo true || echo false)" >> "$GITHUB_OUTPUT"
       - name: Deploy to Firebase Hosting
+        if: steps.creds.outputs.present == 'true'
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/firebase-sa.json
         run: |
