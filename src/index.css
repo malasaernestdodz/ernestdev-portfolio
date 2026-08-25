@@ -5,12 +5,13 @@
   --font-serif: 'Instrument Serif', Georgia, serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  --color-paper: #faf9f6;
-  --color-ink: #1c1c19;
-  --color-muted: #57564f;
-  --color-line: #e4e2da;
-  --color-accent: #166534;
-  --color-accent-soft: #eaf3ec;
+  --color-bg: #0e0e13;
+  --color-surface: #16161c;
+  --color-raise: #1c1c24;
+  --color-line: #26262f;
+  --color-ink: #eceaf1;
+  --color-muted: #98959f;
+  --color-accent: #8f80f3;
 }
 
 html {
@@ -18,11 +19,11 @@ html {
 }
 
 body {
-  @apply bg-paper text-ink font-sans antialiased;
+  @apply bg-bg text-ink font-sans antialiased;
   font-feature-settings: 'cv11', 'ss01';
 }
 
 ::selection {
   background: var(--color-accent);
-  color: var(--color-paper);
+  color: #0e0e13;
 }

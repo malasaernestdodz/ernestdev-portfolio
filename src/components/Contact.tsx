@@ -7,7 +7,7 @@ export function Contact() {
       id="contact"
       className="mx-auto max-w-6xl scroll-mt-20 border-t border-line px-6 py-24 md:py-32"
     >
-      <p className="font-mono text-xs font-medium tracking-[0.25em] uppercase text-accent">03</p>
+      <p className="font-mono text-xs font-medium tracking-[0.25em] uppercase text-accent">04</p>
       <h2
         data-testid="contact-heading"
         className="mt-6 max-w-2xl font-serif text-5xl leading-tight tracking-tight text-balance md:text-6xl"
@@ -23,7 +23,7 @@ export function Contact() {
           target="_blank"
           rel="noopener noreferrer"
           data-testid="contact-linkedin"
-          className="inline-flex items-center gap-1.5 rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-ink"
+          className="inline-flex items-center gap-1.5 rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-bg transition-colors hover:bg-ink"
         >
           LinkedIn
           <ArrowUpRight size={16} />
