@@ -36,7 +36,12 @@ jobs:
         id: creds
         env:
           SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        run: echo "present=$(test -n \"$SA\" && echo true || echo false)" >> "$GITHUB_OUTPUT"
+        run: |
+          if [ -n "$SA" ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Deploy to Firebase Hosting
         if: steps.creds.outputs.present == 'true'
         env:
