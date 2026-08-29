@@ -88,6 +88,45 @@ test('contact links point to the right profiles', async ({ page }) => {
   await expect(page.getByTestId('hero-linkedin')).toHaveAttribute('href', profile.linkedin)
 })
 
+test('hero entrance animation settles to full opacity', async ({ page }) => {
+  await page.goto('/')
+  const name = page.getByTestId('hero-name')
+  await expect(name).toBeVisible()
+  await expect
+    .poll(async () => name.evaluate((el) => Number(getComputedStyle(el).opacity)), {
+      timeout: 5_000,
+    })
+    .toBe(1)
+})
+
+test('typewriter cycles through roles', async ({ page }) => {
+  await page.goto('/')
+  const typed = page.getByTestId('hero-typed')
+  await expect(typed).toBeVisible()
+  const seen = new Set<string>()
+  await expect
+    .poll(
+      async () => {
+        const t = await typed.textContent()
+        if (profile.roles.includes(t ?? '')) seen.add(t!)
+        return seen.size
+      },
+      { timeout: 15_000, intervals: [250] },
+    )
+    .toBeGreaterThanOrEqual(2)
+})
+
+test('scroll-triggered reveals fire for below-the-fold sections', async ({ page }) => {
+  await page.goto('/')
+  await page.getByTestId('nav-projects').click()
+  const card = page.getByTestId('project-card').first()
+  await expect
+    .poll(async () => card.evaluate((el) => Number(getComputedStyle(el).opacity)), {
+      timeout: 5_000,
+    })
+    .toBe(1)
+})
+
 test('github profile link is reachable', async ({ request }) => {
   const gh = await request.get(profile.github)
   expect(gh.status()).toBe(200)

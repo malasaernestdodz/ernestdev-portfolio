@@ -4,10 +4,11 @@ import { About } from './components/About'
 import { Experience } from './components/Experience'
 import { Projects } from './components/Projects'
 import { Contact, Footer } from './components/Contact'
+import { MotionRoot } from './components/motion'
 
 export default function App() {
   return (
-    <>
+    <MotionRoot>
       <Nav />
       <main>
         <Hero />
@@ -17,6 +18,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </MotionRoot>
   )
 }

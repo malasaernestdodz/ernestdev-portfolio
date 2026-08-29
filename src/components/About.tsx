@@ -1,11 +1,14 @@
 import { skillGroups } from '../data'
+import { Reveal } from './motion'
 import { SectionHeading } from './SectionHeading'
 
 export function About() {
   return (
     <section id="about" className="mx-auto max-w-6xl scroll-mt-20 border-t border-line px-6 py-24">
-      <SectionHeading index="01" title="About" />
-      <div className="max-w-2xl space-y-6 text-lg leading-relaxed text-muted text-pretty">
+      <Reveal>
+        <SectionHeading index="01" title="About" />
+      </Reveal>
+      <Reveal className="max-w-2xl space-y-6 text-lg leading-relaxed text-muted text-pretty" delay={0.1}>
         <p>
           I&apos;m Ernest Dodz Malasa, a full-stack developer based in Quezon City. I work across
           the whole stack — database schemas and API design to polished interfaces, on web and
@@ -16,24 +19,26 @@ export function About() {
           CRMs, marketplaces, and AI-assisted products. I care about systems that are correct
           first, then pleasant to use.
         </p>
-      </div>
+      </Reveal>
       <div
         className="mt-16 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4"
         data-testid="skill-groups"
       >
-        {skillGroups.map((group) => (
-          <div key={group.title}>
-            <h3 className="font-mono text-xs font-medium tracking-[0.2em] uppercase text-accent">
-              {group.title}
-            </h3>
-            <ul className="mt-4 space-y-2">
-              {group.skills.map((skill) => (
-                <li key={skill} className="text-sm text-muted">
-                  {skill}
-                </li>
-              ))}
-            </ul>
-          </div>
+        {skillGroups.map((group, i) => (
+          <Reveal key={group.title} delay={i * 0.08}>
+            <div>
+              <h3 className="font-mono text-xs font-medium tracking-[0.2em] uppercase text-accent">
+                {group.title}
+              </h3>
+              <ul className="mt-4 space-y-2">
+                {group.skills.map((skill) => (
+                  <li key={skill} className="text-sm text-muted">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
         ))}
       </div>
     </section>
